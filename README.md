@@ -1,14 +1,31 @@
-# re-gent
+# Intro
 
-A Clojure library designed to ... well, that part is up to you.
+A Zeromq based agent for re-mote
 
-## Usage
+[![Build Status](https://travis-ci.org/re-ops/re-gent.png)](https://travis-ci.org/re-ops/re-gent)
 
-FIXME
 
-## License
+# Get running
 
-Copyright © 2017 FIXME
+TBD
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+# Prerequisite
+
+* JDK 8 with. 
+* libsodium and libzmq
+
+# Copyright and license
+
+Copyright [2017] [Ronen Narkis]
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
