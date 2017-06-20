@@ -10,6 +10,7 @@
   limitations under the License.)
 
 (ns re-gent.core
+  (:gen-class)
   (:require 
     [re-gent.zero.client :refer (setup-client stop-client!)]
     [re-gent.zero.loop :refer (setup-loop stop-loop!)]
@@ -26,5 +27,9 @@
 (defn stop!  []
   (unregister)
   (stop-loop!)
-  (stop-client!)
-  )
+  (stop-client!))
+
+
+(defn -main [& args]
+  (setup))
+

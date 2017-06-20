@@ -45,10 +45,16 @@
 
    ]
 
+   :plugins [
+     [lein-ancient "0.6.7" :exclusions [org.clojure/clojure]]
+     [lein-tag "0.1.0"] [lein-set-version "0.3.0"]]
+
    :profiles {
     :dev {
        :source-paths  ["dev"]
      }
+
+    :aot [re-gent.core]
     }
 
    :resource-paths  ["resources"]
@@ -58,7 +64,11 @@
      :init-ns user
      :prompt (fn [ns] (str "\u001B[35m[\u001B[34m" ns "\u001B[35m]\u001B[33mλ:\u001B[m " ))
      :welcome (println "Welcome to re-gent!" )
-
     }
 
+   :aliases {
+     "reloadable" ["with-profile" "refresh" "do" "clean," "repl"]
+   }
+
+   :main re-gent.core
 )

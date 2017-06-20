@@ -1633,3 +1633,4 @@
 [32mINFO[0m 17-06-18 07:53:04 [[40mre_gent/zero/management.clj[0m] : registered successfuly
 [31mERROR[0m 17-06-18 07:53:26 [[40mre_gent/zero/loop.clj[0m] : java.lang.String cannot be cast to clojure.lang.IFn [Ljava.lang.StackTraceElement;@7a8a55bc
 [32mINFO[0m 17-06-18 07:53:55 [[40mre_gent/zero/management.clj[0m] : (serializable.fn/fn [] (println 1))
+[32mINFO[0m 17-06-19 14:37:26 [[40mre_gent/zero/loop.clj[0m] : setting up read loop
