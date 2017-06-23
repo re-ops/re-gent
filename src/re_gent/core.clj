@@ -18,11 +18,13 @@
     [re-gent.zero.management :refer (register unregister)]
     [re-gent.log :refer (setup-logging)]))
 
-(defn setup []
-  (setup-logging)
-  (let [dealer (setup-client "127.0.0.1" ".curve")]
-    (setup-loop dealer))
-    (register))
+(defn setup
+  ([] (setup "127.0.0.1"))
+  ([host]
+    (setup-logging)
+    (let [dealer (setup-client host ".curve")]
+      (setup-loop dealer))
+       (register)))
 
 
 (defn stop!  []

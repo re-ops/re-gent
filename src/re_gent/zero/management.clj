@@ -11,7 +11,7 @@
 
 (ns re-gent.zero.management
   "Client registration/processing"
-  (:require 
+  (:require
     [serializable.fn :as s]
     [clojure.core.match :refer  [match]]
     [taoensso.timbre :refer (refer-timbre)]
@@ -20,16 +20,16 @@
 
 (refer-timbre)
 
-(defn process 
-   "process server requests" 
+(defn process
+   "process server requests"
    [request]
   (debug "processing..")
   (match [request]
-    [{:request :metrics}] (send- {:reply :metrics :content (read-metrics)})  
-    [{:request :execute :fn f}] (info f) #_(send- {:reply :metrics :content (read-metrics)})  
-    [{:response :ok :on {:request :register}}] (info "registered successfuly")  
+    [{:request :metrics}] (send- {:reply :metrics :content (read-metrics)})
+    [{:request :execute :fn f}] (info f) #_(send- {:reply :metrics :content (read-metrics)})
+    [{:response :ok :on {:request :register}}] (info "registered successfuly")
     :else (info "no handler found for" request)
-    ) 
+    )
   )
 
 (defn register []
