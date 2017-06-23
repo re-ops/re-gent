@@ -11,7 +11,8 @@
 
 (ns re-gent.core
   (:gen-class)
-  (:require 
+  (:require
+    [clojure.core.strint :refer (<<)]
     [re-gent.zero.client :refer (setup-client stop-client!)]
     [re-gent.zero.loop :refer (setup-loop stop-loop!)]
     [re-gent.zero.management :refer (register unregister)]
@@ -19,7 +20,7 @@
 
 (defn setup []
   (setup-logging)
-  (let [dealer (setup-client "127.0.0.1" ".curve")] 
+  (let [dealer (setup-client "127.0.0.1" ".curve")]
     (setup-loop dealer))
     (register))
 
@@ -29,7 +30,9 @@
   (stop-loop!)
   (stop-client!))
 
+(def version "0.1.0")
 
 (defn -main [& args]
+  (println (<< "Running re-gent ~{version}"))
   (setup))
 

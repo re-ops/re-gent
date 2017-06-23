@@ -1,5 +1,5 @@
-(defproject re-gent "0.1.0-SNAPSHOT"
-  :description "A distributed agent for running remote Clojure functions using ZeroMQ securly"
+(defproject re-gent "0.1.0"
+  :description "A distributed agent for running remote Clojure functions using ZeroMQ curve sockets"
   :url "https://github.com/re-ops/re-gent"
   :license  {:name "Apache License, Version 2.0" :url "http://www.apache.org/licenses/LICENSE-2.0.html"}
   :dependencies [
@@ -52,6 +52,13 @@
    :profiles {
     :dev {
        :source-paths  ["dev"]
+       :set-version {
+         :updates [
+            {:path "src/re_gent/core.clj" :search-regex #"\"\d+\.\d+\.\d+\""}
+            {:path "bin/binary.sh" :search-regex #"\d+\.\d+\.\d+"}
+            {:path "README.md" :search-regex #"\d+\.\d+\.\d+"}
+          ]}
+
      }
 
     :aot [re-gent.core]
