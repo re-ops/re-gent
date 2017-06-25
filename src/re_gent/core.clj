@@ -12,29 +12,36 @@
 (ns re-gent.core
   (:gen-class)
   (:require
+    [taoensso.timbre :refer (refer-timbre)]
     [clojure.core.strint :refer (<<)]
     [re-gent.zero.client :refer (setup-client stop-client!)]
     [re-gent.zero.loop :refer (setup-loop stop-loop!)]
     [re-gent.zero.management :refer (register unregister)]
     [re-gent.log :refer (setup-logging)]))
 
-(defn setup
-  ([] (setup "127.0.0.1"))
-  ([host]
-    (setup-logging)
-    (let [dealer (setup-client host ".curve")]
-      (setup-loop dealer))
-       (register)))
+(refer-timbre)
 
+(def version "0.1.0")
 
 (defn stop!  []
+  (warn "shutting down!")
   (unregister)
   (stop-loop!)
   (stop-client!))
 
-(def version "0.1.0")
+(defn add-shutdown []
+  (.addShutdownHook (Runtime/getRuntime) (Thread. stop!)))
+
+
+(defn setup
+  ([] (setup "127.0.0.1"))
+  ([host]
+    (setup-logging)
+    (setup-loop (setup-client host ".curve"))
+    (register)
+    (add-shutdown)
+    (info (<< "Running re-gent ~{version}"))))
 
 (defn -main [& args]
-  (println (<< "Running re-gent ~{version}"))
+  (println )
   (setup))
-
