@@ -42,6 +42,5 @@
     (add-shutdown)
     (info (<< "Running re-gent ~{version}"))))
 
-(defn -main [& args]
-  (println )
-  (setup))
+(defn -main [host & args]
+  (setup host))
