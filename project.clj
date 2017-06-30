@@ -42,7 +42,8 @@
      ; processing
      [org.clojure/core.match "0.3.0-alpha4"]
 
-
+     ; provisioning
+     [me.raynes/fs "1.4.6"]
    ]
 
    :plugins [

@@ -15,6 +15,7 @@
       [clojure.string :refer (join upper-case)]
       [taoensso.timbre.appenders.3rd-party.rolling :refer (rolling-appender)]
       [taoensso.timbre.appenders.core :refer (println-appender)]
+      [re-gent.zero.keys :refer (create-keys)]
       [clansi.core :refer (style)]
       [taoensso.timbre :refer (refer-timbre set-level! merge-config!)]
       [clojure.core.strint :refer (<<)]
@@ -64,7 +65,7 @@
      [clojure.core.strint :refer (<<)]
      [taoensso.timbre :refer (refer-timbre)]
      [taoensso.nippy :as nippy :refer (freeze thaw)]
-     [re-gent.zero.common :refer (read-key client-socket context close!)])
+     [re-gent.zero.common :refer (client-socket context close!)])
   (:import
      [org.zeromq ZMQ]
      [java.net InetAddress]))
@@ -88,6 +89,7 @@
     (.send dealer (freeze m) 0)))
 
 (defn setup-client [host parent]
+  (create-keys ".curve")
   (reset! sockets {:dealer (dealer-socket host parent)})
   (@sockets :dealer))
 
