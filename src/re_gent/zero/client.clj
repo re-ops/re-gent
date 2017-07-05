@@ -9,13 +9,13 @@
   See the License for the specific language governing permissions and
   limitations under the License.)
 
-(ns re-gent.log
-  "log setup"
+(ns re-gent.zero.client
+  "Client setup"
   (:require
       [clojure.string :refer (join upper-case)]
       [taoensso.timbre.appenders.3rd-party.rolling :refer (rolling-appender)]
       [taoensso.timbre.appenders.core :refer (println-appender)]
-      [re-gent.zero.keys :refer (create-keys)]
+      [re-gent.zero.keys :refer (create-keys server-key-exist?)]
       [clansi.core :refer (style)]
       [taoensso.timbre :refer (refer-timbre set-level! merge-config!)]
       [clojure.core.strint :refer (<<)]
@@ -90,6 +90,8 @@
 
 (defn setup-client [host parent]
   (create-keys ".curve")
+  (when-not (server-key-exist? parent)
+    (throw (ex-info "server public key is missing!" {:parent parent :host host})))
   (reset! sockets {:dealer (dealer-socket host parent)})
   (@sockets :dealer))
 

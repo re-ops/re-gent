@@ -52,6 +52,14 @@
        (and (exists? parent) (empty? missing)))
      (catch java.lang.AssertionError e false)))
 
+(defn server-key-exist?
+   "Check client keys are in place"
+   [parent]
+   (try
+     (let [k ((paths parent) :server-public)
+           missing (not (and (exists? k) (read-key k)))]
+       (and (exists? parent) (not missing)))
+     (catch java.lang.AssertionError e false)))
 
 (defn create-keys
    "Lazily create client keys and copy server public key"

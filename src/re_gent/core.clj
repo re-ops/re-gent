@@ -42,5 +42,10 @@
     (add-shutdown)
     (info (<< "Running re-gent ~{version}"))))
 
-(defn -main [host & args]
-  (setup host))
+(defn -main [& args]
+  (if-let [host (first args)]
+    (setup host)
+    (do 
+      (println "Host argument is required") 
+      (System/exit 1))
+    ))
