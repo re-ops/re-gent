@@ -22,13 +22,12 @@
      [serializable-fn "1.1.4"]
      [org.clojure/tools.namespace "0.2.11"]
 
-
      ; configuration
      [clojure-future-spec "1.9.0-alpha15"]
      [formation "0.2.0"]
 
      ; zeromq
-     [org.zeromq/jzmq "3.1.1-SNAPSHOT"]
+     [org.zeromq/jzmq "3.1.1"]
 
      ; metrics
      [com.github.oshi/oshi-core "3.4.2"]
@@ -51,7 +50,7 @@
      [lein-tag "0.1.0"] [lein-set-version "0.3.0"]]
 
    :profiles {
-    :dev {
+     :dev {
        :source-paths  ["dev"]
        :set-version {
          :updates [
