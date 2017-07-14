@@ -76,7 +76,7 @@
   (let [addr (. InetAddress getLocalHost)]
     (.getHostName addr)))
 
-(defn dealer-socket [host parent]
+(defn dealer-socket [host port parent]
   (let [id (freeze {:hostname (hostname) :uid (format "%04X-%04X" (rand-int 30) (rand-int 30))})]
     (doto (client-socket ZMQ/DEALER parent)
       (.setIdentity id)
@@ -88,18 +88,18 @@
   (let [{:keys [dealer]} @sockets]
     (.send dealer (freeze m) 0)))
 
-(defn setup-client [host parent]
+(defn setup-client [host port parent]
   (create-keys ".curve")
   (when-not (server-key-exist? parent)
     (throw (ex-info "server public key is missing!" {:parent parent :host host})))
-  (reset! sockets {:dealer (dealer-socket host parent)})
+  (reset! sockets {:dealer (dealer-socket port host parent)})
   (@sockets :dealer))
 
 (defn stop-client! []
   (close! @sockets))
 
 (comment
-  (setup-client "127.0.0.1" ".curve")
+  (setup-client "127.0.0.1" 9090 ".curve")
   (stop-client!)
   (println @sockets)
   )

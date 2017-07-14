@@ -67,6 +67,9 @@
    :resource-paths  ["resources"]
 
    :jvm-opts ^:replace ["-Djava.library.path=/usr/lib:/usr/local/lib"]
+
+   :repositories  {"bintray"  "http://dl.bintray.com/content/narkisr/narkisr-jars"}
+
    :repl-options {
      :init-ns user
      :prompt (fn [ns] (str "\u001B[35m[\u001B[34m" ns "\u001B[35m]\u001B[33mλ:\u001B[m " ))

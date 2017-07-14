@@ -34,18 +34,21 @@
 
 
 (defn setup
-  ([] (setup "127.0.0.1"))
-  ([host]
+  ([] (setup "127.0.0.1" "9000"))
+  ([host port]
     (setup-logging)
-    (setup-loop (setup-client host ".curve"))
+    (setup-loop (setup-client host port ".curve"))
     (register)
     (add-shutdown)
-    (info (<< "Running re-gent ~{version}"))))
+    (info (<< "Re-gent ~{version} is running!"))
+    (println (<< "Re-gent ~{version} is running!"))
+    ))
 
 (defn -main [& args]
-  (if-let [host (first args)]
-    (setup host)
-    (do 
-      (println "Host argument is required") 
-      (System/exit 1))
-    ))
+  (let [host (first args) port (second args)]
+    (if (and host port)
+      (setup host port)
+      (do 
+        (println "Host and port are required")
+        (System/exit 1))
+      )))
