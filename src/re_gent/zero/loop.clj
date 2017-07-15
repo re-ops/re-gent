@@ -10,7 +10,7 @@
   limitations under the License.)
 
 (ns re-gent.zero.loop
-  (:require 
+  (:require
     [taoensso.nippy :as nippy :refer (thaw)]
     [taoensso.timbre :refer (refer-timbre)]
     [re-gent.zero.management :refer (process)])
@@ -30,11 +30,11 @@
   (let [items (into-array [(ZMQ$PollItem. dealer ZMQ$Poller/POLLIN)]) ]
     (info "setting up read loop")
     (while @read-flag
-      (try 
+      (try
          (ZMQ/poll items 10)
          (when (.isReadable (aget items 0))
            (handle-message (.recv dealer 0)))
-         (catch Exception e 
+         (catch Exception e
            (error e (.getMessage e) (.getStackTrace e)))))
     (info "read loop stopped")))
 
