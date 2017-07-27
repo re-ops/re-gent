@@ -33,7 +33,9 @@
   )
 
 (defn register []
-  (send- {:request :register}))
+  (send- {:request :register})
+  (info "registering")
+  )
 
 (defn unregister []
   (send- {:request :unregister}))

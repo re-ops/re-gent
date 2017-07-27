@@ -92,7 +92,7 @@
   (create-keys ".curve")
   (when-not (server-key-exist? parent)
     (throw (ex-info "server public key is missing!" {:parent parent :host host})))
-  (reset! sockets {:dealer (dealer-socket port host parent)})
+  (reset! sockets {:dealer (dealer-socket host port parent)})
   (@sockets :dealer))
 
 (defn stop-client! []

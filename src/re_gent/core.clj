@@ -48,7 +48,7 @@
   (let [host (first args) port (second args)]
     (if (and host port)
       (setup host port)
-      (do 
+      (do
         (println "Host and port are required")
         (System/exit 1))
       )))
