@@ -45,14 +45,14 @@
      [me.raynes/fs "1.4.6"]
 
      ; common utilities
-     [re-share "0.1.2"]
+     [re-share "0.1.1"]
    ]
 
    :plugins [
      [jonase/eastwood "0.2.4"]
      [lein-cljfmt "0.5.6"]
      [lein-ancient "0.6.7" :exclusions [org.clojure/clojure]]
-     [lein-tag "0.1.0"] 
+     [lein-tag "0.1.0"]
      [lein-set-version "0.3.0"]]
 
    :profiles {
