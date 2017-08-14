@@ -14,11 +14,12 @@
 
 (defn stop
   "Stop the loop and unregister"
-  [_]
-  (warn "shutting down!")
-  (unregister)
-  (stop-loop!)
-  (stop-client!))
+  ([_] (stop))
+  ([]
+    (warn "shutting down!")
+    (unregister)
+    (stop-loop!)
+    (stop-client!)))
 
 (defn add-shutdown []
   (.addShutdownHook (Runtime/getRuntime) (Thread. stop)))
@@ -39,8 +40,8 @@
    (println (<< "Re-gent ~{version} is running!")))
 
 (defn launch [host port]
-  (setup host port)
-  (start))
+  (let [dealer  (setup host port)]
+    (start dealer)))
 
 (defn fail []
   (println "Host and port are required")

@@ -29,11 +29,6 @@
      ; zeromq
      [org.zeromq/jzmq "3.1.1"]
 
-     ; metrics
-     [com.github.oshi/oshi-core "3.4.2"]
-     [com.github.oshi/oshi-json "3.4.2"]
-     [cheshire "5.7.1"]
-
      ; serialization
      [com.taoensso/nippy "2.13.0"]
      [org.clojure/data.codec "0.1.0"]
@@ -44,8 +39,8 @@
      ; provisioning
      [me.raynes/fs "1.4.6"]
 
-     ; common utilities
-     [re-share "0.1.1"]
+     ; common utilities and shared functions
+     [re-share "0.1.2"]
    ]
 
    :plugins [

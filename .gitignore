@@ -12,3 +12,4 @@ pom.xml.asc
 .curve
 .curve_local
 re-gent.log
+re-gent.log.*
