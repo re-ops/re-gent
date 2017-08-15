@@ -16,10 +16,10 @@
   "Stop the loop and unregister"
   ([_] (stop))
   ([]
-    (warn "shutting down!")
-    (unregister)
-    (stop-loop!)
-    (stop-client!)))
+   (warn "shutting down!")
+   (unregister)
+   (stop-loop!)
+   (stop-client!)))
 
 (defn add-shutdown []
   (.addShutdownHook (Runtime/getRuntime) (Thread. stop)))
@@ -32,12 +32,12 @@
    (setup-client host port ".curve")))
 
 (defn start
-   "start this re-gent"
-   [dealer]
-   (setup-loop dealer)
-   (register)
-   (info (<< "Re-gent ~{version} is running!"))
-   (println (<< "Re-gent ~{version} is running!")))
+  "start this re-gent"
+  [dealer]
+  (setup-loop dealer)
+  (register)
+  (info (<< "Re-gent ~{version} is running!"))
+  (println (<< "Re-gent ~{version} is running!")))
 
 (defn launch [host port]
   (let [dealer  (setup host port)]

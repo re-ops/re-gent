@@ -1,14 +1,14 @@
 (ns re-gent.zero.client
   "Zeromq dealer client"
   (:require
-     [re-gent.zero.keys :refer (create-keys server-key-exist?)]
-     [clojure.core.strint :refer (<<)]
-     [taoensso.timbre :refer (refer-timbre)]
-     [taoensso.nippy :as nippy :refer (freeze thaw)]
-     [re-gent.zero.common :refer (client-socket context close!)])
+   [re-gent.zero.keys :refer (create-keys server-key-exist?)]
+   [clojure.core.strint :refer (<<)]
+   [taoensso.timbre :refer (refer-timbre)]
+   [taoensso.nippy :as nippy :refer (freeze thaw)]
+   [re-gent.zero.common :refer (client-socket context close!)])
   (:import
-     [org.zeromq ZMQ]
-     [java.net InetAddress]))
+   [org.zeromq ZMQ]
+   [java.net InetAddress]))
 
 (defn hostname []
   (let [addr (. InetAddress getLocalHost)]
@@ -39,5 +39,4 @@
 (comment
   (setup-client "127.0.0.1" 9090 ".curve")
   (stop-client!)
-  (println @sockets)
-  )
+  (println @sockets))
