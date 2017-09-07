@@ -77,9 +77,12 @@
      :welcome (println "Welcome to re-gent!" )
     }
 
-   :aliases {
-     "reloadable" ["with-profile" "refresh" "do" "clean," "repl"]
+  :aliases {
+     "travis" [
+        "do" "clean," "compile," "cljsbuild" "once," "cljfmt" "check," "eastwood"
+     ]
    }
+
 
    :main re-gent.core
 )
