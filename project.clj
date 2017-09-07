@@ -79,7 +79,7 @@
 
   :aliases {
      "travis" [
-        "do" "clean," "compile," "cljsbuild" "once," "cljfmt" "check," "eastwood"
+        "do" "clean," "compile," "cljfmt" "check," "eastwood"
      ]
    }
 
