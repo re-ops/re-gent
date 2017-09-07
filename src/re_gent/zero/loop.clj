@@ -1,5 +1,6 @@
 (ns re-gent.zero.loop
   (:require
+   [re-share.zero.common :refer (context)]
    [taoensso.nippy :as nippy :refer (thaw)]
    [taoensso.timbre :refer (refer-timbre)]
    [re-gent.zero.management :refer (process)])
@@ -16,21 +17,29 @@
 
 (def t (atom nil))
 
-(defn- read-loop [dealer]
+(defn error-m [e]
+  (error e (.getMessage e) (.getStackTrace e)))
+
+(defn- read-loop [dealer ctx]
   (let [items (into-array [(ZMQ$PollItem. dealer ZMQ$Poller/POLLIN)])]
-    (info "setting up read loop")
-    (while @read-flag
-      (try
-        (ZMQ/poll items 10)
-        (when (.isReadable (aget items 0))
-          (handle-message (.recv dealer 0)))
-        (catch Exception e
-          (error e (.getMessage e) (.getStackTrace e)))))
+    (try 
+      (let [selector (.selector ctx)]
+        (info "setting up read loop")
+        (while @read-flag
+          (try
+            (ZMQ/poll selector items 10)
+            (when (.isReadable (aget items 0))
+              (handle-message (.recv dealer 0)))
+            (catch Exception e
+              (error-m e)))))
+      (catch Exception e 
+        (error-m e)))
+
     (info "read loop stopped")))
 
-(defn setup-loop [dealer]
+(defn setup-loop [dealer ctx]
   (reset! read-flag true)
-  (reset! t (future (read-loop dealer))))
+  (reset! t (future (read-loop dealer ctx))))
 
 (defn stop-loop! []
   (reset! read-flag false)

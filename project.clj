@@ -27,7 +27,7 @@
      [formation "0.2.0"]
 
      ; zeromq
-     [org.zeromq/jzmq "3.1.1"]
+     [org.zeromq/jeromq "0.4.1"]
 
      ; serialization
      [com.taoensso/nippy "2.13.0"]
@@ -40,7 +40,7 @@
      [me.raynes/fs "1.4.6"]
 
      ; common utilities and shared functions
-     [re-share "0.1.2"]
+     [re-share "0.2.0"]
    ]
 
    :plugins [

@@ -1,22 +1,30 @@
 (ns re-gent.zero.client
   "Zeromq dealer client"
   (:require
-   [re-gent.zero.keys :refer (create-keys server-key-exist?)]
+   [re-share.zero.keys :refer (create-client-keys client-keys-exist?)]
    [clojure.core.strint :refer (<<)]
    [taoensso.timbre :refer (refer-timbre)]
    [taoensso.nippy :as nippy :refer (freeze thaw)]
-   [re-gent.zero.common :refer (client-socket context close!)])
+   [taoensso.timbre :refer  (refer-timbre)]
+   [re-share.zero.common :refer (client-socket context close!)])
   (:import
    [org.zeromq ZMQ]
    [java.net InetAddress]))
+
+(refer-timbre)
 
 (defn hostname []
   (let [addr (. InetAddress getLocalHost)]
     (.getHostName addr)))
 
+
+(def ctx (atom nil))
+
 (defn dealer-socket [host port parent]
-  (let [id (freeze {:hostname (hostname) :uid (format "%04X-%04X" (rand-int 30) (rand-int 30))})]
-    (doto (client-socket ZMQ/DEALER parent)
+  (let [uid (format "%04X-%04X" (rand-int 30) (rand-int 30))
+        id (freeze {:hostname (hostname) :uid uid})]
+    (info "uid" uid)
+    (doto (client-socket @ctx ZMQ/DEALER parent)
       (.setIdentity id)
       (.connect (<< "tcp://~{host}:~{port}")))))
 
@@ -27,14 +35,18 @@
     (.send dealer (freeze m) 0)))
 
 (defn setup-client [host port parent]
-  (create-keys ".curve")
-  (when-not (server-key-exist? parent)
+  (create-client-keys ".curve")
+  (when-not (client-keys-exist? parent)
     (throw (ex-info "server public key is missing!" {:parent parent :host host})))
+  (reset! ctx (context))
   (reset! sockets {:dealer (dealer-socket host port parent)})
-  (@sockets :dealer))
+  [(@sockets :dealer) @ctx])
 
 (defn stop-client! []
-  (close! @sockets))
+  (close! @sockets)
+  (when @ctx
+    (.term @ctx))
+  (reset! ctx nil))
 
 (comment
   (setup-client "127.0.0.1" 9090 ".curve")

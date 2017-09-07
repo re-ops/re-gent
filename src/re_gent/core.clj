@@ -33,14 +33,14 @@
 
 (defn start
   "start this re-gent"
-  [dealer]
-  (setup-loop dealer)
+  [[dealer ctx]]
+  (setup-loop dealer ctx)
   (register)
   (info (<< "Re-gent ~{version} is running!"))
   (println (<< "Re-gent ~{version} is running!")))
 
 (defn launch [host port]
-  (let [dealer  (setup host port)]
+  (let [dealer (setup host port)]
     (start dealer)))
 
 (defn fail []
