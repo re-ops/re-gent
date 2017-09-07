@@ -10,7 +10,7 @@
 
 (refer-timbre)
 
-(def version "0.1.0")
+(def version "0.2.0")
 
 (defn stop
   "Stop the loop and unregister"
