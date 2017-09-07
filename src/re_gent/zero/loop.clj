@@ -22,7 +22,7 @@
 
 (defn- read-loop [dealer ctx]
   (let [items (into-array [(ZMQ$PollItem. dealer ZMQ$Poller/POLLIN)])]
-    (try 
+    (try
       (let [selector (.selector ctx)]
         (info "setting up read loop")
         (while @read-flag
@@ -32,7 +32,7 @@
               (handle-message (.recv dealer 0)))
             (catch Exception e
               (error-m e)))))
-      (catch Exception e 
+      (catch Exception e
         (error-m e)))
 
     (info "read loop stopped")))

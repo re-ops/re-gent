@@ -17,7 +17,6 @@
   (let [addr (. InetAddress getLocalHost)]
     (.getHostName addr)))
 
-
 (def ctx (atom nil))
 
 (defn dealer-socket [host port parent]
