@@ -79,7 +79,7 @@
 
   :aliases {
      "travis" [
-        "do" "clean," "compile," "cljfmt" "check," "eastwood"
+        "do" "clean," "compile," "cljfmt" "check," "eastwood" "{:exclude-namespaces [re-gent.zero.loop]}"
      ]
    }
 
