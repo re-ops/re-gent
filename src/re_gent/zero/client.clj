@@ -6,7 +6,7 @@
    [taoensso.timbre :refer (refer-timbre)]
    [taoensso.nippy :as nippy :refer (freeze thaw)]
    [taoensso.timbre :refer  (refer-timbre)]
-   [re-share.zero.common :refer (client-socket context close!)])
+   [re-share.zero.common :refer (client-socket)])
   (:import
    [org.zeromq ZMQ]
    [java.net InetAddress]))
@@ -17,37 +17,29 @@
   (let [addr (. InetAddress getLocalHost)]
     (.getHostName addr)))
 
-(def ctx (atom nil))
-
-(defn dealer-socket [host port parent]
+(defn dealer-socket [ctx host port parent]
   (let [uid (format "%04X-%04X" (rand-int 30) (rand-int 30))
         id (freeze {:hostname (hostname) :uid uid})]
     (info "uid" uid)
-    (doto (client-socket @ctx ZMQ/DEALER parent)
+    (doto (client-socket ctx ZMQ/DEALER parent)
       (.setIdentity id)
       (.connect (<< "tcp://~{host}:~{port}")))))
 
-(def sockets (atom {}))
+(def socket (atom nil))
 
 (defn send- [m]
-  (let [{:keys [dealer]} @sockets]
-    (.send dealer (freeze m) 0)))
+  (debug "sending" m)
+  (.send @socket (freeze m) 0))
 
-(defn setup-client [host port parent]
+(defn setup-client [ctx host port parent]
   (create-client-keys ".curve")
   (when-not (client-keys-exist? parent)
     (throw (ex-info "server public key is missing!" {:parent parent :host host})))
-  (reset! ctx (context))
-  (reset! sockets {:dealer (dealer-socket host port parent)})
-  [(@sockets :dealer) @ctx])
-
-(defn stop-client! []
-  (close! @sockets)
-  (when @ctx
-    (.term @ctx))
-  (reset! ctx nil))
+  (reset! socket (dealer-socket ctx host port parent))
+  @socket
+  )
 
 (comment
   (setup-client "127.0.0.1" 9090 ".curve")
   (stop-client!)
-  (println @sockets))
+  (println socket))
