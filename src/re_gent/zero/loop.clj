@@ -17,25 +17,27 @@
 (defn error-m [e]
   (error e (.getMessage e) (.getStackTrace e)))
 
-(defn- read-loop [dealer ctx]
-  (let [items (into-array [(ZMQ$PollItem. dealer ZMQ$Poller/POLLIN)]) selector (.selector ctx) ]
+(defn- read-loop [dealer selector]
+  (let [items (into-array [(ZMQ$PollItem. dealer ZMQ$Poller/POLLIN)])]
     (try
        (info "setting up read loop")
        (while (not (Thread/interrupted))
-         (try
+         #_(try
            (ZMQ/poll selector items 10)
            (when (.isReadable (aget items 0))
              (handle-message (.recv dealer 0)))
+         (catch java.nio.channels.ClosedChannelException e 
+           (throw e))
          (catch Exception e
-           (warn e))))
+           (error-m e))))
     (finally
       (.close selector)
       (.setLinger 0)
       (.close dealer)))
     (info "read loop stopped")))
 
-(defn setup-loop [dealer ctx]
-  (reset! t (future (read-loop dealer ctx))))
+(defn setup-loop [dealer selector]
+  (reset! t (future (read-loop dealer selector))))
 
 (defn stop-loop! []
   (when @t (future-cancel @t)))
