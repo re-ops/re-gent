@@ -32,6 +32,7 @@
      ; serialization
      [com.taoensso/nippy "2.13.0"]
      [org.clojure/data.codec "0.1.0"]
+     [cheshire "5.8.0"]
 
      ; processing
      [org.clojure/core.match "0.3.0-alpha4"]

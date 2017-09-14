@@ -29,7 +29,8 @@
 
 (defn send- [m]
   (debug "sending" m)
-  (.send @socket (freeze m) 0))
+  (when @socket 
+    (.send @socket (freeze m) 0)))
 
 (defn setup-client [ctx host port parent]
   (create-client-keys ".curve")
@@ -38,6 +39,12 @@
   (reset! socket (dealer-socket ctx host port parent))
   @socket
   )
+
+(defn stop-client! []
+  (when @socket
+   (.setLinger @socket 0)
+   (.close @socket)
+   (reset! socket nil)))
 
 (comment
   (setup-client "127.0.0.1" 9090 ".curve")
