@@ -29,7 +29,7 @@
 
 (defn send- [m]
   (debug "sending" m)
-  (when @socket 
+  (when @socket
     (.send @socket (freeze m) 0)))
 
 (defn setup-client [ctx host port parent]
@@ -37,14 +37,13 @@
   (when-not (client-keys-exist? parent)
     (throw (ex-info "server public key is missing!" {:parent parent :host host})))
   (reset! socket (dealer-socket ctx host port parent))
-  @socket
-  )
+  @socket)
 
 (defn stop-client! []
   (when @socket
-   (.setLinger @socket 0)
-   (.close @socket)
-   (reset! socket nil)))
+    (.setLinger @socket 0)
+    (.close @socket)
+    (reset! socket nil)))
 
 (comment
   (setup-client "127.0.0.1" 9090 ".curve")

@@ -1,13 +1,13 @@
 (ns re-gent.core
   (:gen-class)
   (:require
-    [re-share.zero.common :refer (context)]
-    [taoensso.timbre :refer (refer-timbre)]
-    [clojure.core.strint :refer (<<)]
-    [re-gent.zero.client :refer (setup-client stop-client!)]
-    [re-gent.zero.loop :refer (setup-loop stop-loop!)]
-    [re-gent.zero.management :refer (register unregister)]
-    [re-gent.log :refer (setup-logging)]))
+   [re-share.zero.common :refer (context)]
+   [taoensso.timbre :refer (refer-timbre)]
+   [clojure.core.strint :refer (<<)]
+   [re-gent.zero.client :refer (setup-client stop-client!)]
+   [re-gent.zero.loop :refer (setup-loop stop-loop!)]
+   [re-gent.zero.management :refer (register unregister)]
+   [re-gent.log :refer (setup-logging)]))
 
 (refer-timbre)
 
@@ -25,9 +25,8 @@
    (stop-loop!)
    (stop-client!)
    (when @ctx
-      (.term @ctx))
-   (reset! ctx nil)
-   ))
+     (.term @ctx))
+   (reset! ctx nil)))
 
 (defn add-shutdown []
   (.addShutdownHook (Runtime/getRuntime) (Thread. stop)))
@@ -40,12 +39,12 @@
   "start this re-gent"
   ([_] (start "127.0.0.1" "9000"))
   ([host port]
-    (reset! ctx (context))
-    (let [dealer (setup-client @ctx host port ".curve")]
-      (setup-loop dealer))
-    (register)
-    (info (<< "Re-gent ~{version} is running!"))
-    (println (<< "Re-gent ~{version} is running!"))))
+   (reset! ctx (context))
+   (let [dealer (setup-client @ctx host port ".curve")]
+     (setup-loop dealer))
+   (register)
+   (info (<< "Re-gent ~{version} is running!"))
+   (println (<< "Re-gent ~{version} is running!"))))
 
 (defn launch [host port]
   (setup)

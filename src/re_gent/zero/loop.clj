@@ -19,14 +19,14 @@
 
 (defn- read-loop [dealer]
   (try
-     (info "setting up read loop")
-     (while (not (Thread/interrupted))
-       (let [msg (ZMsg/recvMsg dealer) content (.pop msg)]
-          (assert (not (nil? content)))
-          (handle-message (.getData content))))
+    (info "setting up read loop")
+    (while (not (Thread/interrupted))
+      (let [msg (ZMsg/recvMsg dealer) content (.pop msg)]
+        (assert (not (nil? content)))
+        (handle-message (.getData content))))
     (catch Exception e
       (error-m e)))
-    (info "read loop stopped"))
+  (info "read loop stopped"))
 
 (defn setup-loop [dealer]
   (reset! t (future (read-loop dealer))))
