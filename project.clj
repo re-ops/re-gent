@@ -7,18 +7,18 @@
 
      [org.clojure/core.incubator "0.1.4"]
      [me.raynes/conch "0.8.0"]
-     [org.clojure/core.async "0.3.442"]
+     [org.clojure/core.async "0.3.443"]
      [narkisr/cliopatra "1.1.0"]
      [narkisr/clansi "1.2.0"]
-     [com.rpl/specter "1.0.1"]
+     [com.rpl/specter "1.0.3"]
 
      ; logging
      [com.taoensso/timbre "4.10.0"]
-     [com.fzakaria/slf4j-timbre "0.3.5"]
+     [com.fzakaria/slf4j-timbre "0.3.7"]
      [org.clojure/tools.trace "0.7.9"]
 
      ; repl
-     [io.aviso/pretty "0.1.33"]
+     [io.aviso/pretty "0.1.34"]
      [serializable-fn "1.1.4"]
      [org.clojure/tools.namespace "0.2.11"]
 
@@ -27,7 +27,7 @@
      [formation "0.2.0"]
 
      ; zeromq
-     [org.zeromq/jeromq "0.4.1"]
+     [org.zeromq/jeromq "0.4.2"]
 
      ; serialization
      [com.taoensso/nippy "2.13.0"]
