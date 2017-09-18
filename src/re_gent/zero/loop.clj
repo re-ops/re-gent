@@ -35,4 +35,4 @@
 (defn stop-loop! []
   (reset! flag false)
   (when @t (future-cancel @t)
-    (reset! t nil)))
+        (reset! t nil)))
