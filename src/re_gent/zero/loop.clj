@@ -13,6 +13,7 @@
   (process (thaw message)))
 
 (def t (atom nil))
+(def flag (atom true))
 
 (defn error-m [e]
   (error e (.getMessage e) (.getStackTrace e)))
@@ -20,7 +21,7 @@
 (defn- read-loop [dealer]
   (try
     (info "setting up read loop")
-    (while (not (Thread/interrupted))
+    (while @flag
       (let [msg (ZMsg/recvMsg dealer) content (.pop msg)]
         (assert (not (nil? content)))
         (handle-message (.getData content))))
@@ -32,4 +33,6 @@
   (reset! t (future (read-loop dealer))))
 
 (defn stop-loop! []
-  (when @t (future-cancel @t)))
+  (reset! flag false)
+  (when @t (future-cancel @t)
+    (reset! t nil)))
