@@ -23,8 +23,8 @@
     (info "setting up read loop")
     (while @flag
       (let [msg (ZMsg/recvMsg dealer) content (.pop msg)]
-        (assert (not (nil? content)))
-        (handle-message (.getData content))))
+        (when content
+          (handle-message (.getData content)))))
     (catch Exception e
       (error-m e)))
   (info "read loop stopped"))
@@ -34,5 +34,5 @@
 
 (defn stop-loop! []
   (reset! flag false)
-  (when @t (future-cancel @t)
-        (reset! t nil)))
+  (when @t 
+    (reset! t nil)))

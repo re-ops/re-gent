@@ -21,8 +21,9 @@
   ([]
    (warn "shutting down!")
    (unregister)
-   (debug "unregister-ed")
+   (info "unregister-ed")
    (stop-loop!)
+   (Thread/sleep 10)
    (stop-client!)
    (when @ctx
      (.term @ctx))
