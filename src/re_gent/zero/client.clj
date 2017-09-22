@@ -32,11 +32,15 @@
   (when @socket
     (.send @socket (freeze m) 0)))
 
+(defn- monitor [socket]
+  (.monitor socket "inproc://events" ZMQ/EVENT_ALL))
+
 (defn setup-client [ctx host port parent]
   (create-client-keys ".curve")
   (when-not (client-keys-exist? parent)
     (throw (ex-info "server public key is missing!" {:parent parent :host host})))
   (reset! socket (dealer-socket ctx host port parent))
+  (monitor @socket)
   @socket)
 
 (defn stop-client! []

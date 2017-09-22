@@ -6,6 +6,7 @@
    [clojure.core.strint :refer (<<)]
    [re-gent.zero.client :refer (setup-client stop-client!)]
    [re-gent.zero.loop :refer (setup-loop stop-loop!)]
+   [re-gent.zero.events :refer (setup-events stop-events!)]
    [re-gent.zero.management :refer (register unregister)]
    [re-gent.log :refer (setup-logging)]))
 
@@ -22,6 +23,7 @@
    (warn "shutting down!")
    (unregister)
    (info "unregister-ed")
+   (stop-events!)
    (stop-loop!)
    (Thread/sleep 10)
    (stop-client!)
@@ -42,6 +44,7 @@
   ([host port]
    (reset! ctx (context))
    (let [dealer (setup-client @ctx host port ".curve")]
+     (setup-events @ctx)
      (setup-loop dealer))
    (register)
    (info (<< "Re-gent ~{version} is running!"))

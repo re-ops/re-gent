@@ -30,6 +30,7 @@
   (info "read loop stopped"))
 
 (defn setup-loop [dealer]
+  (reset! flag true)
   (reset! t (future (read-loop dealer))))
 
 (defn stop-loop! []
