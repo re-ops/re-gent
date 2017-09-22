@@ -34,5 +34,5 @@
 
 (defn stop-loop! []
   (reset! flag false)
-  (when @t 
+  (when @t
     (reset! t nil)))
