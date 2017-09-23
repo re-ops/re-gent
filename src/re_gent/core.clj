@@ -28,8 +28,8 @@
    (Thread/sleep 10)
    (stop-client!)
    (when @ctx
-     (.term @ctx))
-   (reset! ctx nil)))
+     (.term @ctx)
+     (reset! ctx nil))))
 
 (defn add-shutdown []
   (.addShutdownHook (Runtime/getRuntime) (Thread. stop)))
@@ -46,7 +46,6 @@
    (let [dealer (setup-client @ctx host port ".curve")]
      (setup-events @ctx)
      (setup-loop dealer))
-   (register)
    (info (<< "Re-gent ~{version} is running!"))
    (println (<< "Re-gent ~{version} is running!"))))
 
