@@ -1,6 +1,6 @@
 # Intro
 
-A Jeromq based agent for re-mote
+A Zeromq based agent for [re-mote](https://github.com/re-ops/re-mote)
 
 [![Build Status](https://travis-ci.org/re-ops/re-gent.png)](https://travis-ci.org/re-ops/re-gent)
 
@@ -8,6 +8,7 @@ A Jeromq based agent for re-mote
 # Get running
 
 Build the single binary agent file:
+
 ```bash
 $ ./bin/binary.sh
 ```
