@@ -1,18 +1,53 @@
 # Intro
 
-A Zeromq based agent for re-mote
+A Jeromq based agent for re-mote
 
 [![Build Status](https://travis-ci.org/re-ops/re-gent.png)](https://travis-ci.org/re-ops/re-gent)
 
 
 # Get running
 
-TBD
+Build the single binary agent file:
+```bash
+$ ./bin/binary.sh
+```
+
+Now from a re-mote seassion:
+
+```clojure
+
+[re-mote]λ: (deploy develop "re-gent/target/re-gent") ; agent binary path
+
+Run summary:
+
+  ✔ re-a
+  ✔ re-e
+
+
+Run summary:
+
+  ✔ re-a
+  ✔ re-e
+
+
+Run summary:
+
+  ✔ re-a
+  ✔ re-e
+
+[#re_mote.repl.base.Hosts {:auth {:user "vagrant"} :hosts ("re-a" "re-e")}
+ {:failure {} :hosts ("re-a" "re-e") :success [{:code 0 :host "re-a" :uuid "d2687d896054430ea84df44ae54d5b92"} {:code 0 :host "re-e" :uuid "d52e9260043c4eb787526eaebba16c11"}]}]
+
+[re-mote]λ: (registered-hosts)
+                re-a   000A-0019
+                re-e   0000-001B
+nil
+
+```
 
 # Prerequisite
 
-* JDK 8 with. 
-* libsodium and libzmq
+* JDK 8 and lein.
 
 # Copyright and license
 
