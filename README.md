@@ -48,7 +48,8 @@ nil
 
 # Prerequisite
 
-* JDK 8 and lein.
+* JDK 8 and lein
+* Bash
 
 # Copyright and license
 

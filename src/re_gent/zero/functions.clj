@@ -1,6 +1,6 @@
 (ns re-gent.zero.functions
   (:require
-   [re-share.metrics :refer (read-metrics)]
+   [re-share.oshi :refer (read-metrics os)]
    [clojure.java.shell :refer [sh]]
    [cheshire.core :refer :all]
    [serializable.fn :refer :all]
