@@ -35,7 +35,7 @@
     - steam collect logs
     - log level
   "
-  [& {:keys [interval level] :or {interval 10 level :debug}}]
+  [& {:keys [interval level] :or {interval 10 level :info}}]
   (disable-coloring)
   (set-level! level))
 

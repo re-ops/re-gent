@@ -52,4 +52,4 @@
 (comment
   (setup-client "127.0.0.1" 9090 ".curve")
   (stop-client!)
-  (println socket))
+  )
