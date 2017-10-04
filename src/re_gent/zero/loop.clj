@@ -28,8 +28,7 @@
     (catch Exception e
       (info "killing agent")
       (error-m e)
-      (System/exit 1) 
-      ))
+      (System/exit 1)))
   (info "read loop stopped"))
 
 (defn setup-loop [dealer]

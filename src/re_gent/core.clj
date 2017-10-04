@@ -59,5 +59,5 @@
 
 (defn -main [host port & args]
   (if (and host port)
-   (launch host port (first args))
-   (fail)))
+    (launch host port (first args))
+    (fail)))

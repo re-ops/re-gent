@@ -67,10 +67,8 @@
   (when @socket
     (.setLinger @socket 0)
     (.close @socket)
-    (reset! socket nil))
-  )
+    (reset! socket nil)))
 
 (comment
   (setup-client "127.0.0.1" 9090 ".curve")
-  (stop-client!)
-  )
+  (stop-client!))
