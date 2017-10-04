@@ -34,8 +34,8 @@
 (defn add-shutdown []
   (.addShutdownHook (Runtime/getRuntime) (Thread. stop)))
 
-(defn setup []
-  (setup-logging)
+(defn setup [level]
+  (setup-logging :level (keyword (or level "info")))
   (add-shutdown))
 
 (defn start
@@ -49,16 +49,15 @@
    (info (<< "Re-gent ~{version} is running!"))
    (println (<< "Re-gent ~{version} is running!"))))
 
-(defn launch [host port]
-  (setup)
+(defn launch [host port level]
+  (setup level)
   (start host port))
 
 (defn fail []
   (println "Host and port are required")
   (System/exit 1))
 
-(defn -main [& args]
-  (let [host (first args) port (second args)]
-    (if (and host port)
-      (launch host port)
-      (fail))))
+(defn -main [host port & args]
+  (if (and host port)
+   (launch host port (first args))
+   (fail)))

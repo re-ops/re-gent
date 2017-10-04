@@ -16,7 +16,7 @@
 (defn run-fn
   "Run a function from the server"
   [f args name uuid]
-  (info "executing" f args)
+  (debug "executing" name uuid)
   (binding [*ns* (find-ns 're-gent.zero.functions)]
     (try
       (let [[r t] (measure (fn [] (apply (eval f) args)))]

@@ -43,4 +43,4 @@
   (set-level! :debug))
 
 (defn debug-off []
-  (set-level! :info))
+  (set-level! :debug))

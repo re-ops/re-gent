@@ -10,7 +10,7 @@
 
 (defn- handle-message [message]
   (debug "processing")
-  (process (thaw message)))
+  (future (process message)))
 
 (def t (atom nil))
 (def flag (atom true))
@@ -24,9 +24,12 @@
     (while @flag
       (let [msg (ZMsg/recvMsg dealer) content (.pop msg)]
         (when content
-          (handle-message (.getData content)))))
+          (handle-message (thaw (.getData content))))))
     (catch Exception e
-      (error-m e)))
+      (info "killing agent")
+      (error-m e)
+      (System/exit 1) 
+      ))
   (info "read loop stopped"))
 
 (defn setup-loop [dealer]
