@@ -2,6 +2,7 @@
   (:require
    [taoensso.nippy :as nippy :refer (thaw)]
    [taoensso.timbre :refer (refer-timbre)]
+   [re-gent.zero.reply :refer (setup-reply reset-reply! peek-send)]
    [re-gent.zero.management :refer (process)])
   (:import
    [org.zeromq ZMsg ZMQ ZMQ$PollItem ZMQ$Poller]))
@@ -12,30 +13,29 @@
   (debug "processing")
   (future (process message)))
 
-(def t (atom nil))
 (def flag (atom true))
 
 (defn error-m [e]
   (error e (.getMessage e) (.getStackTrace e)))
 
-(defn- read-loop [dealer]
+(defn- socket-loop [dealer]
   (try
     (info "setting up read loop")
     (while @flag
-      (let [msg (ZMsg/recvMsg dealer) content (.pop msg)]
-        (when content
-          (handle-message (thaw (.getData content))))))
+      (if-let [msg (ZMsg/recvMsg dealer ZMQ/DONTWAIT)]
+        (when-let [content (.pop msg)]
+          (handle-message (thaw (.getData content))))
+        (peek-send dealer))
+      (Thread/sleep 10))
     (catch Exception e
-      (info "killing agent")
-      (error-m e)
-      (System/exit 1)))
+      (error-m e)))
   (info "read loop stopped"))
 
 (defn setup-loop [dealer]
+  (setup-reply)
   (reset! flag true)
-  (reset! t (future (read-loop dealer))))
+  (future (socket-loop dealer)))
 
 (defn stop-loop! []
   (reset! flag false)
-  (when @t
-    (reset! t nil)))
+  (reset-reply!))

@@ -5,7 +5,7 @@
    [serializable.fn :as s]
    [clojure.core.match :refer  [match]]
    [taoensso.timbre :refer (refer-timbre)]
-   [re-gent.zero.client :refer (send-)]))
+   [re-gent.zero.reply :refer (send-)]))
 
 (refer-timbre)
 

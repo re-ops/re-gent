@@ -34,9 +34,11 @@
 (defn add-shutdown []
   (.addShutdownHook (Runtime/getRuntime) (Thread. stop)))
 
-(defn setup [level]
-  (setup-logging :level (keyword (or level "info")))
-  (add-shutdown))
+(defn setup
+  ([] (setup :info))
+  ([level]
+   (setup-logging :level (keyword (or level "info")))
+   (add-shutdown)))
 
 (defn start
   "start this re-gent"

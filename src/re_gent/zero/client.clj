@@ -4,9 +4,9 @@
    [re-share.zero.keys :refer (create-client-keys client-keys-exist?)]
    [clojure.core.strint :refer (<<)]
    [taoensso.timbre :refer (refer-timbre)]
-   [taoensso.nippy :as nippy :refer (freeze thaw)]
+   [taoensso.nippy :as nippy :refer (freeze)]
    [taoensso.timbre :refer  (refer-timbre)]
-   [re-share.zero.common :refer (client-socket)])
+   [re-share.zero.common :refer (client-socket close)])
   (:import
    [org.zeromq ZMQ]
    [java.net InetAddress]))
@@ -27,26 +27,6 @@
 
 (def socket (atom nil))
 
-(def send-queue (atom (clojure.lang.PersistentQueue/EMPTY)))
-
-(def flag (atom nil))
-
-(defn setup-loop [socket]
-  (info "send loop running")
-  (while @flag
-    (if-let [m (peek @send-queue)]
-      (try
-        (debug "sending" m)
-        (.send socket (freeze m) 0)
-        (swap! send-queue pop)
-        (catch Exception e
-          (error (.getMessage e))))
-      (Thread/sleep 100)))
-  (info "send loop done"))
-
-(defn send- [m]
-  (swap! send-queue conj m))
-
 (defn- monitor [socket]
   (.monitor socket "inproc://events" ZMQ/EVENT_ALL))
 
@@ -55,18 +35,12 @@
   (when-not (client-keys-exist? parent)
     (throw (ex-info "server public key is missing!" {:parent parent :host host})))
   (reset! socket (dealer-socket ctx host port parent))
-  (reset! send-queue (clojure.lang.PersistentQueue/EMPTY))
-  (reset! flag true)
-  (future (setup-loop @socket))
   (monitor @socket)
   @socket)
 
 (defn stop-client! []
-  (reset! flag nil)
-  (reset! send-queue nil)
   (when @socket
-    (.setLinger @socket 0)
-    (.close @socket)
+    (close @socket)
     (reset! socket nil)))
 
 (comment
