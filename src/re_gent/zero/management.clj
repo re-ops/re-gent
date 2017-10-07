@@ -28,7 +28,6 @@
 (defn process
   "process server requests"
   [request]
-  (debug "processing..")
   (match [request]
     [{:request :execute :fn f :args args :name name :uuid uuid}] (run-fn f args name uuid)
     [{:response :ok :on {:request :register}}] (info "registered successfuly")

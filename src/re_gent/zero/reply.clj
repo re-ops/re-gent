@@ -9,10 +9,11 @@
 
 (defn peek-send [socket]
   (when-let [m (peek @send-queue)]
-    (debug "sending" m)
+    (trace "sending" m)
     (assert (= (.send socket (freeze m) 0) true))
     (swap! send-queue pop)
-    (debug "sent" m)))
+    (debug "sent" m)
+    true))
 
 (defn send- [m]
   (swap! send-queue conj m))

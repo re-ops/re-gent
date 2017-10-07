@@ -10,7 +10,6 @@
 (refer-timbre)
 
 (defn- handle-message [message]
-  (debug "processing")
   (future (process message)))
 
 (def flag (atom true))
@@ -25,8 +24,7 @@
       (if-let [msg (ZMsg/recvMsg dealer ZMQ/DONTWAIT)]
         (when-let [content (.pop msg)]
           (handle-message (thaw (.getData content))))
-        (peek-send dealer))
-      (Thread/sleep 10))
+        (or (peek-send dealer) (Thread/sleep 10))))
     (catch Exception e
       (error-m e)))
   (info "read loop stopped"))
