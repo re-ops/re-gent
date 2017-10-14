@@ -29,11 +29,11 @@
       (error-m e)))
   (info "read loop stopped"))
 
-(defn setup-loop [dealer]
+(defn start [dealer]
   (setup-reply)
   (reset! flag true)
   (future (socket-loop dealer)))
 
-(defn stop-loop! []
+(defn stop []
   (reset! flag false)
   (reset-reply!))

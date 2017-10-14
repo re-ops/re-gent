@@ -41,7 +41,7 @@
      [me.raynes/fs "1.4.6"]
 
      ; common utilities and shared functions
-     [re-share "0.2.5"]
+     [re-share "0.3.0"]
    ]
 
    :plugins [

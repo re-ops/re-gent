@@ -30,7 +30,7 @@
 (defn- monitor [socket]
   (.monitor socket "inproc://events" ZMQ/EVENT_ALL))
 
-(defn setup-client [ctx host port parent]
+(defn start [ctx host port parent]
   (create-client-keys ".curve")
   (when-not (client-keys-exist? parent)
     (throw (ex-info "server public key is missing!" {:parent parent :host host})))
@@ -38,11 +38,7 @@
   (monitor @socket)
   @socket)
 
-(defn stop-client! []
+(defn stop []
   (when @socket
     (close @socket)
     (reset! socket nil)))
-
-(comment
-  (setup-client "127.0.0.1" 9090 ".curve")
-  (stop-client!))
