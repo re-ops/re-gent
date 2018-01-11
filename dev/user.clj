@@ -1,6 +1,6 @@
 (ns user
   (:require
-   [re-gent.log :refer (debug-on debug-off)]
+   [re-share.log :refer (debug-on debug-off)]
    [clojure.java.io :as io]
    [clojure.repl :refer :all]
    [clojure.tools.namespace.repl :refer (refresh refresh-all)]

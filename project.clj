@@ -41,7 +41,7 @@
      [me.raynes/fs "1.4.6"]
 
      ; common utilities and shared functions
-     [re-share "0.3.0"]
+     [re-share "0.4.1"]
    ]
 
    :plugins [
@@ -70,7 +70,7 @@
 
    :jvm-opts ^:replace ["-Djava.library.path=/usr/lib:/usr/local/lib"]
 
-   :repositories  {"bintray"  "http://dl.bintray.com/content/narkisr/narkisr-jars"}
+   :repositories  {"bintray"  "https://dl.bintray.com/content/narkisr/narkisr-jars"}
 
    :repl-options {
      :init-ns user
