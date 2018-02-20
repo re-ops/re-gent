@@ -1,6 +1,6 @@
 # Intro
 
-A Zeromq based agent for [re-mote](https://github.com/re-ops/re-mote)
+A Zeromq based agent for [Re-mote](https://github.com/re-ops/re-mote)
 
 [![Build Status](https://travis-ci.org/re-ops/re-gent.png)](https://travis-ci.org/re-ops/re-gent)
 
