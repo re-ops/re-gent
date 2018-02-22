@@ -1,2 +1,2 @@
 LEIN_SNAPSHOTS_IN_RELEASE=1 lein uberjar
-cat bin/stub.sh target/re-gent-0.4.0-standalone.jar > target/re-gent && chmod +x target/re-gent
+cat bin/stub.sh target/re-gent-0.4.1-standalone.jar > target/re-gent && chmod +x target/re-gent
