@@ -1,6 +1,7 @@
 (ns re-gent.zero.functions
   (:require
    [re-share.oshi :refer (read-metrics os)]
+   [re-scan.core :refer [nmap open-ports]]
    [clojure.java.shell :refer [sh]]
    [cheshire.core :refer :all]
    [serializable.fn :refer :all]

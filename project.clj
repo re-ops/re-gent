@@ -42,6 +42,7 @@
 
      ; common utilities and shared functions
      [re-share "0.4.2"]
+     [re-scan "0.1.0"]
    ]
 
    :plugins [
