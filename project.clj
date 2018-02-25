@@ -41,7 +41,7 @@
      [me.raynes/fs "1.4.6"]
 
      ; common utilities and shared functions
-     [re-share "0.4.2"]
+     [re-share "0.5.4"]
      [re-scan "0.1.0"]
    ]
 
