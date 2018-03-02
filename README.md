@@ -13,7 +13,7 @@ Build the single binary agent file:
 $ ./bin/binary.sh
 ```
 
-Now from a [re-mote](https://github.com/re-ops/re-mote) seassion:
+Now from a [re-mote](https://github.com/re-ops/re-mote) session:
 
 ```clojure
 
