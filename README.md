@@ -1,6 +1,8 @@
 # Intro
 
-Re-gent is A Zeromq based agent for [Re-mote](https://github.com/re-ops/re-mote) it enables the execution of distributed Clojure functions on a cluster of machines.
+Re-gent is a secure ZeroMQ based agent that enables the execution of distributed Clojure functions on a cluster of machines.
+
+It is used in [Re-mote](https://github.com/re-ops/re-mote) [pipelines](https://re-ops.github.io/re-docs/#abstractions) for operations that require low latency and persistent connections.
 
 Follow the official [docs](https://re-ops.github.io/re-docs/) for more information on how to [build](https://re-ops.github.io/re-docs/setup/re-gent.html#build) and [deploy](https://re-ops.github.io/re-docs/setup/re-gent.html#deploy).
 
