@@ -1,4 +1,4 @@
-(defproject re-gent "0.4.1"
+(defproject re-gent "0.4.2"
   :description "A distributed agent for running remote Clojure functions using ZeroMQ curve sockets"
   :url "https://github.com/re-ops/re-gent"
   :license  {:name "Apache License, Version 2.0" :url "http://www.apache.org/licenses/LICENSE-2.0.html"}
