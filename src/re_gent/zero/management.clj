@@ -22,7 +22,7 @@
       (let [[r t] (measure (fn [] (apply (eval f) args)))]
         (send- {:reply :execute :result r :time t :name name :uuid uuid}))
       (catch Throwable e
-        (send- {:reply :execute :result :failed :name name :uuid uuid :error {:out (.getMessage e)}})
+        (send- {:reply :execute :result :failed :name name :uuid uuid :error {:out (.getMessage e) :exception (.getName (class e))}})
         (error "failed to call f" e)))))
 
 (defn process
