@@ -39,6 +39,8 @@
 
      ; provisioning
      [me.raynes/fs "1.4.6"]
+     ; checksumming
+     [digest "1.4.9"]
 
      ; common utilities and shared functions
      [re-share "0.6.6"]
