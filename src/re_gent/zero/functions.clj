@@ -5,10 +5,11 @@
    [clojure.java.shell :refer [sh]]
    [cheshire.core :refer :all]
    [serializable.fn :refer :all]
-   [re-cog.common :refer [require-constants require-functions]]))
+   [re-cog.common :refer [require-constants require-functions bind-bash]]))
 
 (require-functions)
 (require-constants)
+(bind-bash)
 
 (comment
   (clojure.pprint/pprint (read-metrics)))
