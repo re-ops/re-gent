@@ -10,9 +10,10 @@
 (defn safe-freeze
   "Trying to freeze m failing without killing the agent"
   [m]
-  (try (freeze m)
-       (catch Exception e
-         (error e))))
+  (try
+    (freeze m)
+    (catch Exception e
+      (error e))))
 
 (defn peek-send [socket]
   (when-let [m (peek @send-queue)]
