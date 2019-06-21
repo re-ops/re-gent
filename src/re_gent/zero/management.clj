@@ -2,16 +2,12 @@
   "Client registration/processing"
   (:require
    [re-gent.zero.functions]
-   [serializable.fn :as s]
+   [re-share.core :refer (measure)]
    [clojure.core.match :refer  [match]]
    [taoensso.timbre :refer (refer-timbre)]
    [re-gent.zero.reply :refer (send-)]))
 
 (refer-timbre)
-
-(defn measure [f]
-  (let [starttime (System/nanoTime) r (f)]
-    [r (/ (- (System/nanoTime) starttime) 1e9)]))
 
 (defn run-fn
   "Run a function from the server"
