@@ -22,10 +22,6 @@
      [serializable-fn "1.1.4"]
      [org.clojure/tools.namespace "0.2.11"]
 
-     ; configuration
-     [clojure-future-spec "1.9.0-alpha15"]
-     [formation "0.2.0"]
-
      ; zeromq
      [org.zeromq/jeromq "0.4.2"]
 
@@ -39,6 +35,7 @@
 
      ; provisioning
      [me.raynes/fs "1.4.6"]
+
      ; checksumming
      [digest "1.4.9"]
 
@@ -46,6 +43,10 @@
      [re-share "0.11.4"]
      [re-cog "0.1.0"]
      [re-scan "0.2.1"]
+
+     ; configuration
+     [aero "1.1.3"]
+     [expound "0.7.2"]
    ]
 
    :plugins [
