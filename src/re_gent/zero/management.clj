@@ -15,8 +15,8 @@
   (debug "executing" name uuid)
   (binding [*ns* (find-ns 're-gent.zero.functions)]
     (try
-      (let [[r t] (measure (fn [] (apply (eval f) args)))]
-        (send- {:reply :execute :result r :time t :name name :uuid uuid}))
+      (let [m (measure (fn [] (apply (eval f) args)))]
+        (send- (merge {:reply :execute :name name :uuid uuid} m)))
       (catch Throwable e
         (send- {:reply :execute :result :failed :name name :uuid uuid :error {:out (.getMessage e) :exception (.getName (class e))}})
         (error "failed to call f" e)))))
