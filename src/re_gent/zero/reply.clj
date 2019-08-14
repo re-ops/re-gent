@@ -1,5 +1,7 @@
 (ns re-gent.zero.reply
   (:require
+   [cheshire.core :refer (generate-string)]
+   [clojure.data.codec.base64 :as b64]
    [taoensso.timbre :refer (refer-timbre)]
    [taoensso.nippy :as nippy :refer (freeze)]))
 
@@ -7,19 +9,22 @@
 
 (def send-queue (atom (clojure.lang.PersistentQueue/EMPTY)))
 
-(defn safe-freeze
-  "Trying to freeze m failing without killing the agent"
+(defn into-base64 [original]
+  (b64/encode (.getBytes original)))
+
+(defn safe-encode
+  "Trying to encode m without killing the agent on failure"
   [m]
   (try
-    (freeze m)
+    (into-base64 (generate-string m))
     (catch Exception e
-      (error e))))
+      (error "Failed to encode" e))))
 
 (defn peek-send [socket]
   (when-let [m (peek @send-queue)]
-    (when-let [ice (safe-freeze m)]
+    (when-let [encoded (safe-encode m)]
       (debug "sending" m)
-      (assert (= (.send socket ice 0) true))
+      (assert (= (.send socket encoded 0) true))
       (swap! send-queue pop)
       (debug "sent" m)
       true)))
