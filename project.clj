@@ -3,7 +3,7 @@
   :url "https://github.com/re-ops/re-gent"
   :license  {:name "Apache License, Version 2.0" :url "http://www.apache.org/licenses/LICENSE-2.0.html"}
   :dependencies [
-     [org.clojure/clojure "1.9.0"]
+     [org.clojure/clojure "1.10.0"]
 
      [org.clojure/core.incubator "0.1.4"]
      [me.raynes/conch "0.8.0"]
@@ -23,7 +23,7 @@
      [org.clojure/tools.namespace "0.2.11"]
 
      ; zeromq
-     [org.zeromq/jeromq "0.4.2"]
+     [org.zeromq/jeromq "0.5.1"]
 
      ; serialization
      [com.taoensso/nippy "2.14.0"]
