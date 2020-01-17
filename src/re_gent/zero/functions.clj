@@ -6,7 +6,8 @@
    [cheshire.core :refer :all]
    [serializable.fn :refer :all]
    [re-cog.common.functions :refer (require-functions require-resources)]
-   [re-cog.common :refer (require-constants bind-bash)]))
+   [re-cog.scripts.common :refer (bind-bash)]
+   [re-cog.common.constants :refer (require-constants)]))
 
 (require-functions)
 (require-resources)

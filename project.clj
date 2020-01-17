@@ -41,7 +41,7 @@
 
      ; common utilities and shared functions
      [re-share "0.11.10"]
-     [re-cog "0.2.1"]
+     [re-cog "0.2.4"]
      [re-scan "0.2.1"]
 
      ; configuration
