@@ -2,7 +2,7 @@
   "Client registration/processing"
   (:require
    [re-gent.zero.functions]
-   [re-share.core :refer (measure)]
+   [re-share.core :refer (measure error-m)]
    [clojure.core.match :refer  [match]]
    [taoensso.timbre :refer (refer-timbre)]
    [re-gent.zero.reply :refer (send-)]))
@@ -19,7 +19,7 @@
         (send- (merge {:reply :execute :name name :uuid uuid} m)))
       (catch Throwable e
         (send- {:reply :execute :result :failed :name name :uuid uuid :error {:out (.getMessage e) :exception (.getName (class e))}})
-        (error "failed to call f" e)))))
+        (error-m e)))))
 
 (defn process
   "process server requests"
