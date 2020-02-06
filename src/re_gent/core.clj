@@ -1,6 +1,7 @@
 (ns re-gent.core
   (:gen-class)
   (:require
+   [re-cog.facts.datalog :refer (populate)]
    [re-share.zero.common :refer (context)]
    [taoensso.timbre :refer (refer-timbre)]
    [clojure.core.strint :refer (<<)]
@@ -39,6 +40,7 @@
   ([] (setup :info))
   ([level]
    (setup-logging :level (keyword (or level "info")))
+   (populate)
    (add-shutdown)))
 
 (defn start

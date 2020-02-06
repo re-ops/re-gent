@@ -40,7 +40,7 @@
      [digest "1.4.9"]
 
      ; common utilities and shared functions
-     [re-share "0.11.10"]
+     [re-share "0.12.0"]
      [re-cog "0.2.4"]
      [re-scan "0.2.1"]
 
