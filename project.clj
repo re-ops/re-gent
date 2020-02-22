@@ -8,8 +8,6 @@
      [org.clojure/core.incubator "0.1.4"]
      [me.raynes/conch "0.8.0"]
      [org.clojure/core.async "0.3.443"]
-     [narkisr/cliopatra "1.1.0"]
-     [narkisr/clansi "1.2.0"]
      [com.rpl/specter "1.0.3"]
 
      ; logging
