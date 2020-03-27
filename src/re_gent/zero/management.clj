@@ -11,21 +11,21 @@
 
 (defn run-fn
   "Run a function from the server"
-  [f args name uuid]
-  (debug "executing" name uuid)
+  [f args uuid]
+  (debug "executing" uuid)
   (binding [*ns* (find-ns 're-gent.zero.functions)]
     (try
       (let [m (measure (fn [] (apply (eval f) args)))]
-        (send- (merge {:reply :execute :name name :uuid uuid} m)))
+        (send- (merge {:reply :execute :uuid uuid} m)))
       (catch Throwable e
-        (send- {:reply :execute :result :failed :name name :uuid uuid :error {:out (.getMessage e) :exception (.getName (class e))}})
+        (send- {:reply :execute :result :failed :uuid uuid :error {:out (.getMessage e) :exception (.getName (class e))}})
         (error-m e)))))
 
 (defn process
   "process server requests"
   [request]
   (match [request]
-    [{:request :execute :fn f :args args :name name :uuid uuid}] (run-fn f args name uuid)
+    [{:request :execute :fn f :args args :uuid uuid}] (run-fn f args uuid)
     [{:response :ok :on {:request :register}}] (info "registered successfuly")
     :else (info "no handler found for" request)))
 
