@@ -14,7 +14,7 @@ Follow the official [docs](https://re-ops.github.io/re-docs/) for more informati
 
 # Copyright and license
 
-Copyright [2018] [Ronen Narkis]
+Copyright [2020] [Ronen Narkis]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
