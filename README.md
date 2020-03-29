@@ -1,14 +1,14 @@
 # Intro
 
-Re-gent is a secure ZeroMQ based agent that enables the execution of distributed Clojure functions on a cluster of machines.
+Re-gent is a ZeroMQ based agent that enables the execution of distributed Clojure functions on a cluster of machines.
 
-It is used in [Re-mote](https://github.com/re-ops/re-mote) [pipelines](https://re-ops.github.io/re-docs/#abstractions) for operations that require low latency and persistent connections.
+It is used in [Re-mote](https://re-ops.github.io/re-docs/setup/re-mote.html#re-mote) [pipelines](https://re-ops.github.io/re-docs/#abstractions) to execute remote serializable Clojure functions.
 
-Follow the official [docs](https://re-ops.github.io/re-docs/) for more information on how to [build](https://re-ops.github.io/re-docs/setup/re-gent.html#build) and [deploy](https://re-ops.github.io/re-docs/setup/re-gent.html#deploy).
+Follow the official [docs](https://re-ops.github.io/re-docs/setup/re-gent.html) for more information on how to [build](https://re-ops.github.io/re-docs/setup/re-gent.html#build) and [deploy](https://re-ops.github.io/re-docs/setup/re-gent.html#deploy) it to remote machines managed by [Re-core](https://github.com/re-ops/re-core).
 
 [![Build Status](https://travis-ci.org/re-ops/re-gent.png)](https://travis-ci.org/re-ops/re-gent)
 
-# Basic Usage
+# Usage
 
 ![re-gent-gif](https://re-ops.github.io/re-one/gifs/re-gent.gif)
 
