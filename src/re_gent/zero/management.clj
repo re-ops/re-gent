@@ -17,6 +17,9 @@
     (try
       (let [m (measure (fn [] (apply (eval f) args)))]
         (send- (merge {:reply :execute :uuid uuid} m)))
+      (catch clojure.lang.Compiler$CompilerException e
+        (send- {:reply :execute :result :failed :uuid uuid :error {:out (.getMessage (.getCause e)) :exception (.getName (class e))}})
+        (error-m e))
       (catch Throwable e
         (send- {:reply :execute :result :failed :uuid uuid :error {:out (.getMessage e) :exception (.getName (class e))}})
         (error-m e)))))
