@@ -1,6 +1,7 @@
 (ns re-gent.zero.client
   "Zeromq dealer client"
   (:require
+   [re-cog.facts.datalog :refer (hostname)]
    [re-share.zero.keys :refer (create-client-keys client-keys-exist?)]
    [clojure.core.strint :refer (<<)]
    [taoensso.timbre :refer (refer-timbre)]
@@ -12,10 +13,6 @@
    [java.net InetAddress]))
 
 (refer-timbre)
-
-(defn hostname []
-  (let [addr (. InetAddress getLocalHost)]
-    (.getHostName addr)))
 
 (defn dealer-socket [ctx host port parent]
   (let [uid (format "%04X-%04X" (rand-int 30) (rand-int 30))
