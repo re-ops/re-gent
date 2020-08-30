@@ -1,7 +1,6 @@
 (ns re-gent.core
   (:gen-class)
   (:require
-   [re-cog.facts.datalog :refer (populate)]
    [re-share.zero.common :refer (context)]
    [taoensso.timbre :refer (refer-timbre)]
    [clojure.core.strint :refer (<<)]
@@ -9,6 +8,7 @@
    [re-gent.zero.client :as client]
    [re-gent.zero.loop :as lop]
    [re-gent.zero.events :refer (handle)]
+   [re-gent.facts :as facts]
    [re-gent.zero.management :refer (register unregister)]
    [re-gent.log :refer (setup-logging)]))
 
@@ -31,16 +31,18 @@
    (client/stop)
    (when @ctx
      (.term @ctx)
-     (reset! ctx nil))))
+     (reset! ctx nil))
+   (facts/stop)))
 
 (defn add-shutdown []
   (.addShutdownHook (Runtime/getRuntime) (Thread. stop)))
 
 (defn setup
-  ([] (setup :info))
+  ([]
+   (setup :info))
   ([level]
+   (facts/setup)
    (setup-logging :level (keyword (or level "info")))
-   (populate)
    (add-shutdown)))
 
 (defn start
@@ -51,6 +53,7 @@
    (let [dealer (client/start @ctx host port ".curve")]
      (evn/start @ctx handle)
      (lop/start dealer))
+   (facts/start)
    (info (<< "Re-gent ~{version} is running!"))
    (println (<< "Re-gent ~{version} is running!"))))
 
