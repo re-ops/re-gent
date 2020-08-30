@@ -14,7 +14,7 @@
 
 (refer-timbre)
 
-(def version "0.5.5")
+(def version "0.6.0")
 
 (def ctx (atom nil))
 
