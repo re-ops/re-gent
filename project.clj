@@ -39,7 +39,7 @@
 
      ; common utilities and shared functions
      [re-share "0.16.6"]
-     [re-cog "0.5.1"]
+     [re-cog "0.5.2"]
      [re-scan "0.2.1"]
 
      ; configuration
