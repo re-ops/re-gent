@@ -10,7 +10,8 @@
    [re-gent.zero.events :refer (handle)]
    [re-gent.facts :as facts]
    [re-gent.zero.management :refer (register unregister)]
-   [re-gent.log :refer (setup-logging)]))
+   [re-gent.log :refer (setup-logging)])
+  (:import [java.util.concurrent ThreadPoolExecutor ThreadPoolExecutor$AbortPolicy TimeUnit ArrayBlockingQueue]))
 
 (refer-timbre)
 
@@ -37,10 +38,16 @@
 (defn add-shutdown []
   (.addShutdownHook (Runtime/getRuntime) (Thread. stop)))
 
+(defn thread-pool []
+  (let [queue (ArrayBlockingQueue. 10)]
+    (set-agent-send-off-executor!
+     (ThreadPoolExecutor. 10 20 180 TimeUnit/SECONDS queue (ThreadPoolExecutor$AbortPolicy.)))))
+
 (defn setup
   ([]
    (setup :info))
   ([level]
+   (thread-pool)
    (facts/setup)
    (setup-logging :level (keyword (or level "info")))
    (add-shutdown)))
