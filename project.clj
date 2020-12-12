@@ -1,4 +1,4 @@
-(defproject re-gent "0.6.0"
+(defproject re-gent "0.6.1"
   :description "A distributed agent for running remote Clojure functions using ZeroMQ curve sockets"
   :url "https://github.com/re-ops/re-gent"
   :license  {:name "Apache License, Version 2.0" :url "http://www.apache.org/licenses/LICENSE-2.0.html"}
@@ -7,49 +7,42 @@
 
      [org.clojure/core.incubator "0.1.4"]
      [me.raynes/conch "0.8.0"]
-     [org.clojure/core.async "0.3.443"]
-     [com.rpl/specter "1.0.3"]
+     [com.rpl/specter "1.1.3"]
 
      ; logging
-     [com.taoensso/timbre "4.10.0"]
-     [com.fzakaria/slf4j-timbre "0.3.7"]
-     [org.clojure/tools.trace "0.7.9"]
+     [com.taoensso/timbre "5.1.0"]
+     [com.fzakaria/slf4j-timbre "0.3.20"]
 
      ; repl
-     [io.aviso/pretty "0.1.34"]
      [serializable-fn "1.1.4"]
-     [org.clojure/tools.namespace "0.2.11"]
+     [org.clojure/tools.namespace "1.1.0"]
 
      ; zeromq
-     [org.zeromq/jeromq "0.5.1"]
+     [org.zeromq/jeromq "0.5.2"]
 
      ; serialization
      [com.taoensso/nippy "2.14.0"]
      [org.clojure/data.codec "0.1.1"]
-     [cheshire "5.9.0"]
+     [cheshire "5.10.0"]
 
      ; processing
-     [org.clojure/core.match "0.3.0-alpha4"]
+     [org.clojure/core.match "1.0.0"]
 
      ; provisioning
      [me.raynes/fs "1.4.6"]
 
      ; checksumming
-     [digest "1.4.9"]
+     [digest "1.4.10"]
 
      ; common utilities and shared functions
-     [re-share "0.16.6"]
-     [re-cog "0.5.5"]
+     [re-share "0.17.0"]
+     [re-cog "0.5.17"]
      [re-scan "0.2.1"]
-
-     ; configuration
-     [aero "1.1.3"]
-     [expound "0.7.2"]
    ]
 
    :plugins [
      [lein-cljfmt "0.5.6"]
-     [lein-ancient "0.6.7" :exclusions [org.clojure/clojure]]
+     [lein-ancient "0.6.15" :exclusions [org.clojure/clojure]]
      [lein-tag "0.1.0"]
      [lein-set-version "0.3.0"]]
 

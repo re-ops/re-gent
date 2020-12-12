@@ -12,7 +12,7 @@
     - log level
   "
   [& {:keys [level] :or {level :info}}]
-  (log/setup "re-gent" [] ["re-gent.metrics"])
+  (log/setup "re-gent" [])
   (set-level! level))
 
 (defn debug-on []
