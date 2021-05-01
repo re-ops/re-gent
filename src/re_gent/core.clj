@@ -15,7 +15,7 @@
 
 (refer-timbre)
 
-(def version "0.6.2")
+(def version "0.6.3")
 
 (def ctx (atom nil))
 
@@ -38,16 +38,18 @@
 (defn add-shutdown []
   (.addShutdownHook (Runtime/getRuntime) (Thread. stop)))
 
+(def pool (atom nil))
+
 (defn thread-pool []
   (let [queue (ArrayBlockingQueue. 10)]
-    (set-agent-send-off-executor!
-     (ThreadPoolExecutor. 10 20 180 TimeUnit/SECONDS queue (ThreadPoolExecutor$AbortPolicy.)))))
+    (ThreadPoolExecutor. 10 20 180 TimeUnit/SECONDS queue (ThreadPoolExecutor$AbortPolicy.))))
 
 (defn setup
   ([]
    (setup :info))
   ([level]
-   (thread-pool)
+   (reset! pool (thread-pool))
+   (set-agent-send-off-executor! @pool)
    (facts/setup)
    (setup-logging :level (keyword (or level "info")))
    (add-shutdown)))

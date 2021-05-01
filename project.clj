@@ -1,4 +1,4 @@
-(defproject re-gent "0.6.2"
+(defproject re-gent "0.6.3"
   :description "A distributed agent for running remote Clojure functions using ZeroMQ curve sockets"
   :url "https://github.com/re-ops/re-gent"
   :license  {:name "Apache License, Version 2.0" :url "http://www.apache.org/licenses/LICENSE-2.0.html"}
@@ -36,7 +36,7 @@
 
      ; common utilities and shared functions
      [re-share "0.17.1"]
-     [re-cog "0.5.22"]
+     [re-cog "0.5.23"]
      [re-scan "0.2.1"]
    ]
 
