@@ -35,8 +35,8 @@
      [digest "1.4.10"]
 
      ; common utilities and shared functions
-     [re-share "0.17.1"]
-     [re-cog "0.5.23"]
+     [re-share "0.17.2"]
+     [re-cog "0.6.0"]
      [re-scan "0.2.1"]
    ]
 
