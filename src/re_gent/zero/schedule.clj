@@ -32,7 +32,7 @@
     (watch k (rest (seconds n))
            (fn []
              (binding [*ns* (find-ns 're-gent.zero.functions)]
-               (info "running scheduled" k)
+               (debug "running scheduled" k)
                (swap! scheduled-results update k
                       (fn [q]
                         (try
