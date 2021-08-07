@@ -1,7 +1,6 @@
 (ns re-gent.zero.management
   "Client registration/processing"
   (:require
-   [clj-time.core :as t]
    [re-gent.zero.functions]
    [re-gent.zero.schedule :refer (schedule-fn)]
    [re-cog.zero.scheduled :refer (scheduled-results)]

@@ -3,7 +3,7 @@
   (:require
    [re-gent.zero.functions]
    [re-cog.zero.scheduled :refer (scheduled-results)]
-   [clj-time.core :as t]
+   [re-share.time :refer (local-now to-long)]
    [re-share.schedule :refer (watch halt! seconds)]
    [re-share.core :refer (measure error-m)]
    [clojure.core.match :refer [match]]
@@ -22,7 +22,7 @@
       (pop q') q')))
 
 (defn stamp [m]
-  (assoc m :timestamp (.getMillis (t/now))))
+  (assoc m :timestamp (to-long (local-now))))
 
 (defn schedule-fn
   "Schedule an fn every n seconds"
